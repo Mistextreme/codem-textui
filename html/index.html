@@ -12,15 +12,80 @@
         <link rel="stylesheet" href="./css/responsive.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
+        <style>
+            /*
+             * Classes de posicionamento do wrapper.
+             * Usadas dinamicamente via :class="positionClass" no Vue.
+             */
+            .pos-left {
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                overflow: hidden;
+            }
+            .pos-right {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 40%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                overflow: hidden;
+            }
+            .pos-top {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                overflow: hidden;
+            }
+            .pos-bottom {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 60%;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                overflow: hidden;
+            }
+            .pos-center {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 40%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+        </style>
+
         <title>Codem Underground</title>
     </head>
 
     <body>
         <div id="app">
-            <div class="w-full h-[100vh]" style="background-size: 100% 100%">
-                <div class="w-[40%] h-full flex items-center justify-start relative" style="overflow: hidden">
-                    <transition-group name="fade">
+            <div class="w-full h-[100vh] relative" style="background-size: 100% 100%">
+
+                <!-- Wrapper com posição dinâmica -->
+                <div :class="positionClass">
+                    <transition-group :name="animName">
                         <div class="w-[80%] h-[11%] absolute" v-for="notification in notifications" :key="notification.id">
+
                             <div v-if="notification.thema == 'thema-1'" class="w-full h-[100%] flex justify-start">
                                 <div
                                     class="w-[17.2%] h-full flex items-center justify-center"
@@ -57,6 +122,7 @@
                                     </h2>
                                 </div>
                             </div>
+
                             <div v-if="notification.thema == 'thema-2'" class="w-full h-[100%] flex justify-start absolute">
                                 <div
                                     class="w-[17.2%] h-full flex items-center justify-center"
@@ -129,6 +195,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div
                                 v-if="notification.thema == 'thema-4'"
                                 class="inline-flex items-center bg-cover h-[80%] pr-[2vw] absolute"
@@ -164,6 +231,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div
                                 v-if="notification.thema == 'thema-5'"
                                 class="inline-flex items-center h-[40%] mt-[3.5vh] ml-[1vw] rounded-[0.3vw] pr-[0.3vw]"
@@ -220,6 +288,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div v-if="notification.thema == 'thema-6'" class="inline-flex items-center mt-[3.5vh] ml-[1vw] h-[40%] absolute">
                                 <div class="w-[2.6vw] h-full" style="background-image: url('./images/thema6.png'); background-size: 100% 100%">
                                     <div
@@ -251,6 +320,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div
                                 v-if="notification.thema == 'thema-7'"
                                 class="inline-flex items-center mt-[1.7vh] h-[66%] pr-[4vw] absolute"
@@ -289,6 +359,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div v-if="notification.thema == 'thema-8'" class="inline-flex items-center mt-[1.7vh] h-[66%] pr-[4vw] relative">
                                 <div
                                     class="w-[9vw] h-[40vh] absolute"
@@ -326,6 +397,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div v-if="notification.thema == 'thema-9'" class="inline-flex items-center mt-[1.7vh] h-[66%] pr-[4vw] relative">
                                 <div
                                     class="w-[12vw] h-[40vh] absolute ml-[-3vw]"
@@ -363,6 +435,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div
                                 v-if="notification.thema == 'thema-10'"
                                 class="inline-flex items-center mt-[1.7vh] h-[55%] pr-[4vw]"
@@ -399,6 +472,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div
                                 v-if="notification.thema == 'thema-11'"
                                 class="inline-flex items-center mt-[1.7vh] h-[55%] pr-[4vw]"
@@ -435,6 +509,7 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                             <div
                                 v-if="notification.thema == 'thema-12'"
                                 class="inline-flex items-center mt-[1.7vh] h-[55%] pr-[4vw]"
@@ -471,11 +546,14 @@
                                     {{notification.message}}
                                 </h2>
                             </div>
+
                         </div>
                     </transition-group>
                 </div>
+
             </div>
         </div>
+
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="https://unpkg.com/swiper@5.3.8/js/swiper.min.js"></script>
